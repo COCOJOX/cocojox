@@ -1,1 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>COCO JOX — Soft. Strong. Totally You.</title>
+  <meta name="description" content="COCO JOX — Teen undies with a confident fresh vibe. Playful and empowering. Soft, Strong. Totally You." />
+  <!-- Google font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070707;
+      --card:#0f0f10;
+      --muted:#bfc2c6;
+      --accent1:#ff6fcf; /* pink */
+      --accent2:#6ae7d6; /* aqua */
+      --accent3:#a27bff; /* purple */
+      --accent4:#ffe36a; /* yellow */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:16px;
+      --max-width:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg) 0%, #0b0b0b 60%);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px 20px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+    }
 
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      margin-bottom:24px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo {
+      width:68px;height:68px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 -6px 12px rgba(255,255,255,0.03);
+      border:2px solid rgba(255,255,255,0.06);
+    }
+    .logo svg{width:46px;height:46px;filter:drop-shadow(0 6px 8px rgba(0,0,0,0.5))}
+    .brand h1{font-size:18px; margin:0; letter-spacing:0.4px;}
+    .brand p{margin:0;font-size:12px;color:var(--muted);}
+
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:18px;
+      font-weight:600;
+      font-size:13px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      margin-bottom:28px;
+    }
+    .hero-card{
+      background: linear-gradient(180deg,var(--glass), rgba(255,255,255,0.02));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .eyebrow{
+      display:inline-block;
+      padding:8px 12px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      border-radius:999px;
+      color:#070707;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:0.6px;
+      margin-bottom:14px;
+    }
+    h2.title{
+      margin:6px 0 8px 0;
+      font-size:34px;
+      line-height:1.02;
+      letter-spacing:-0.6px;
+      font-weight:900;
+      font-family:"Playfair Display", serif;
+    }
+    p.lead{color:var(--muted); margin:0 0 18px 0; font-size:15px;}
+    .cta-row{display:flex; gap:12px; align-items:center;}
+    .btn{
+      padding:12px 18px;
+      border-radius:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      border: none;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent2),var(--accent1));
+      color:#061216;
+      box-shadow: 0 8px 30px rgba(99,205,188,0.12);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+    }
+    .badges{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+    .badge{
+      padding:8px 10px;
+      border-radius:10px;
+      background:var(--glass-2);
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* mascot column */
+    .mascot-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:260px;
+    }
+    .mascot{
+      width:360px;height:360px;
+      display:block;
+      transform: translateY(0);
+      transition: transform .8s cubic-bezier(.2,.9,.2,1);
+      will-change:transform;
+    }
+    .mascot:hover{ transform: translateY(-6px) rotate(-1deg) }
+
+    /* sections */
+    section{margin-bottom:28px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap:16px;
+    }
+    .card{
+      background:linear-gradient(180deg,var(--card), #0b0b0c);
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .project-title{font-weight:800;margin:0 0 6px 0}
+    .project-desc{color:var(--muted); font-size:13px; margin:0 0 12px 0}
+
+    .controls{display:flex; gap:10px; flex-wrap:wrap}
+    .socials{display:flex; gap:12px; align-items:center}
+
+    footer{
+      color:var(--muted);
+      text-align:center;
+      font-size:13px;
+      padding:26px 6px;
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns: 1fr; text-align:center}
+      .mascot-wrap{order:-1}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column; align-items:flex-start; gap:12px}
+    }
+
+    /* small decorative */
+    .accent-squiggle{
+      display:inline-block;
+      width:40px;height:8px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent3));
+      border-radius:999px;
+      margin-left:8px;
+      vertical-align:middle;
+      transform: translateY(3px) rotate(-8deg);
+    }
+
+    /* contact form */
+    .contact-form input,.contact-form textarea{
+      width:100%;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      padding:12px;
+      border-radius:10px;
+      color:#fff;
+      font-size:14px;
+      resize:vertical;
+    }
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:600px){ .contact-grid{grid-template-columns:1fr} }
+
+    /* subtle animated stripe */
+    .hero:before{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:0;
+      height:220px;
+      background: radial-gradient(800px 200px at 10% 20%, rgba(162,123,255,0.06), transparent 10%),
+                  radial-gradient(600px 160px at 90% 60%, rgba(255,111,207,0.04), transparent 12%);
+      pointer-events:none;
+      z-index:0;
+      border-radius:20px;
+    }
+
+    /* tiny utilities */
+    .muted{color:var(--muted)}
+    .kicker{font-size:12px; color:var(--muted); letter-spacing:0.6px; text-transform:uppercase}
+    small.block{display:block; color:var(--muted)}
+    .pill{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent3),var(--accent2)); color:#071218; font-weight:700;}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#">
+        <div class="logo" aria-hidden="true">
+          <!-- stylised COCO JOX mark: camel + ribbon (simple svg) -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="COCO JOX">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#ff6fcf"/>
+                <stop offset="0.5" stop-color="#6ae7d6"/>
+                <stop offset="1" stop-color="#a27bff"/>
+              </linearGradient>
+            </defs>
+            <!-- friendly camel head simplified -->
+            <g transform="translate(8,6) scale(.86)">
+              <path d="M20 45c0-8 6-14 14-14s18 4 22 10 6 18-6 24c-9 5-28 6-34-2-6-8-2-22-2-22z" fill="url(#g1)"/>
+              <circle cx="33" cy="30" r="2.8" fill="#fff"/>
+              <path d="M40 30c2-1 5-2 8 0" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.7"/>
+              <!-- ribbon/star hint -->
+              <path d="M74 14c1 3-1 7-4 8s-8-1-11-3 2-6 6-8 8-1 9 3z" fill="#fff" opacity="0.08"/>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>COCO JOX</h1>
+          <p>Teen undies — Soft, Strong. Totally You.</p>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">Confident. Fresh. Playful.</span>
+          <h2 class="title">COCO JOX — Teen undies with attitude.</h2>
+          <p class="lead">Balancing playful and empowerment. Designed for comfort, confidence and colorful self-expression — whoever “you” is.</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects" title="See products">Shop the Look ➜</a>
+            <a class="btn btn-ghost" href="#contact">Contact / Stockists</a>
+          </div>
+
+          <div class="badges" style="margin-top:14px;">
+            <div class="badge">Free shipping over $60</div>
+            <div class="badge">Ethically made</div>
+            <div class="badge">Soft stretch fabric</div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <small class="kicker">Tagline</small>
+            <div style="margin-top:6px; font-weight:700; display:flex; gap:8px; align-items:center;">
+              <div class="pill">Soft</div>
+              <div class="pill">Strong</div>
+              <div class="pill">Totally You</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mascot-wrap">
+          <!-- decorative mascot SVG (editable) -->
+          <svg class="mascot" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="COCO the camel mascot">
+            <!-- background circle -->
+            <defs>
+              <radialGradient id="bg" cx="50%" cy="35%" r="60%">
+                <stop offset="0" stop-color="#fff" stop-opacity="0.06"/>
+                <stop offset="1" stop-color="#000" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="100%" height="100%" rx="34" fill="url(#bg)"></rect>
+
+            <!-- simplified playful camel character (cartoon) -->
+            <g transform="translate(60,38) scale(.85)">
+              <!-- body -->
+              <ellipse cx="270" cy="320" rx="160" ry="120" fill="#f9c7f0" opacity="0.18"/>
+              <path d="M150 240c10-40 40-70 90-72 48-2 86 20 110 52 30 36 42 92 8 140-24 36-88 56-160 52-72-4-114-30-138-78-18-34-14-84 90-184z" fill="#ffe6fb" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+              <!-- head -->
+              <g transform="translate(190,90)">
+                <ellipse cx="80" cy="70" rx="64" ry="54" fill="#ffd6f3"/>
+                <path d="M36 68c20 10 44 12 66 4" stroke="#ffb6ea" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <!-- eye & lash -->
+                <circle cx="58" cy="64" r="6" fill="#111"/>
+                <path d="M50 54c-6-8-10-12-16-10" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+                <!-- wink -->
+                <path d="M92 66c6-2 14-8 22-8" stroke="#111" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+                <!-- eyelashes -->
+                <path d="M48 56c-8-6-14-8-22-6" stroke="#111" stroke-width="2" />
+                <!-- smile -->
+                <path d="M46 82c8 6 26 8 38 2" stroke="#b53a86" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </g>
+
+              <!-- underwear (colorful boy-cut) -->
+              <g transform="translate(200,260)">
+                <rect x="0" y="0" width="220" height="80" rx="36" ry="36" fill="url(#candy)" />
+              </g>
+
+              <!-- candy pattern -->
+              <defs>
+                <linearGradient id="candy" x1="0" x2="1">
+                  <stop offset="0" stop-color="#ff6fcf"/>
+                  <stop offset="0.34" stop-color="#6ae7d6"/>
+                  <stop offset="0.7" stop-color="#a27bff"/>
+                </linearGradient>
+              </defs>
+
+              <!-- sparkle -->
+              <g transform="translate(420,30) scale(.9)">
+                <path d="M6 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff" opacity=".95" transform="scale(3)"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" aria-labelledby="about-h">
+        <div style="display:flex; justify-content:space-between; gap:20px; align-items:flex-start; margin-bottom:12px;">
+          <div>
+            <h3 id="about-h" style="margin:0 0 6px 0;">About COCO JOX</h3>
+            <small class="muted">A short brand bio</small>
+            <p style="max-width:70ch; margin-top:10px; color:var(--muted);">
+              COCO JOX: Teen undies with a confident fresh vibe. Balancing playful and empowerment. Soft, Strong. Totally You — whoever “you” is.
+              <br><br>
+              We focus on soft, stretchy fabrics, rainbow-forward prints and comfortable fits that let teens express themselves with confidence. Designed ethically, manufactured responsibly.
+            </p>
+          </div>
+          <div style="min-width:200px;">
+            <div class="card" style="display:flex; flex-direction:column; gap:8px;">
+              <strong>Quick facts</strong>
+              <small class="muted">Brand</small>
+              <p style="margin:0">COCO JOX</p>
+              <small class="muted">Tagline</small>
+              <p style="margin:0">Soft, Strong. Totally You.</p>
+              <small class="muted">Status</small>
+              <p style="margin:0">Concept • Sampling • e-commerce ready</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS / PORTFOLIO -->
+      <section id="projects">
+        <div style="display:flex; justify-content:space-between; align-items:end; gap:12px; margin-bottom:12px;">
+          <div>
+            <h3 style="margin:0 0 4px 0">Projects / Portfolio</h3>
+            <small class="muted">Examples. Replace entries with your real project names & URLs.</small>
+          </div>
+          <div class="controls">
+            <button class="btn btn-ghost" onclick="openEdit()">Edit Content</button>
+            <a class="btn btn-primary" href="#contact">Request wholesale</a>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- sample project card 1 -->
+          <article class="card" data-id="p1">
+            <div class="project-title">COCO JOX — Launch Collection</div>
+            <div class="project-desc">A 12-piece first drop: candy prints, rainbow elastics, and a boy-cut range. (Replace with your product page URL)</div>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">View product</a>
+          </article>
+
+          <!-- sample project card 2 -->
+          <article class="card" data-id="p2">
+            <div class="project-title">Mascot Campaign — COCO</div>
+            <div class="project-desc">Character design, editorial sketches, and social GIFs to show playful style. (Replace with portfolio link)</div>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">View campaign</a>
+          </article>
+
+          <!-- sample project card 3 -->
+          <article class="card" data-id="p3">
+            <div class="project-title">Sustainable Fabric Sourcing</div>
+            <div class="project-desc">Sourcing partner list, certifications, and supplier audit reports. (Link later)</div>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">Read more</a>
+          </article>
+
+          <!-- sample project card 4 -->
+          <article class="card" data-id="p4">
+            <div class="project-title">Retail Pop-up Concept</div>
+            <div class="project-desc">Design & layout for a bright pop-up experience focused on selfies and inclusivity.</div>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">See mockup</a>
+          </article>
+
+          <!-- filler to keep layout -->
+          <article class="card" style="opacity:0.6;">
+            <div class="project-title">Add your project</div>
+            <div class="project-desc">Edit this file and replace placeholders with real links & images.</div>
+          </article>
+
+          <article class="card" style="opacity:0.6;">
+            <div class="project-title">Add your project</div>
+            <div class="project-desc">Tip: use full URLs so calls-to-action work.</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section id="blog">
+        <div style="display:flex; justify-content:space-between; gap:12px; align-items:end; margin-bottom:12px;">
+          <div>
+            <h3 style="margin:0 0 4px 0">Blog / Articles</h3>
+            <small class="muted">Sharing design notes, launches, and styling tips for teens & parents.</small>
+          </div>
+          <div class="controls">
+            <a class="btn btn-primary" href="#">Subscribe</a>
+          </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:repeat(3,1fr);">
+          <article class="card">
+            <strong>How we design prints for confidence</strong>
+            <p class="project-desc">Short read: building prints that are bold without being loud.</p>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">Read</a>
+          </article>
+
+          <article class="card">
+            <strong>Fit guide — know your size</strong>
+            <p class="project-desc">Inclusive sizing and how to measure for comfort.</p>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">Read</a>
+          </article>
+
+          <article class="card">
+            <strong>Behind the scenes: fabric choices</strong>
+            <p class="project-desc">Why stretch, recovery and breathability matter.</p>
+            <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">Read</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" aria-labelledby="contact-h">
+        <div style="display:flex; gap:20px; align-items:flex-start; justify-content:space-between;">
+          <div style="flex:1; min-width:260px;">
+            <h3 id="contact-h" style="margin:0 0 6px 0">Contact</h3>
+            <small class="muted">Wholesale, press or collaboration</small>
+
+            <div class="card" style="margin-top:12px;">
+              <p style="margin:0 0 10px 0">Email: <a class="muted" href="mailto:coco@cocojox.example">coco@cocojox.example</a></p>
+              <p style="margin:0 0 10px 0">Phone: <span class="muted">+61 400 000 000</span> (placeholder)</p>
+              <p style="margin:0 0 10px 0">Address: <span class="muted">Australia (fulfilment: TBD)</span></p>
+
+              <div style="margin-top:8px;" class="socials" aria-hidden="false">
+                <!-- replace with your actual URLs -->
+                <a href="#" title="Instagram" class="muted">Instagram</a>
+                <a href="#" title="TikTok/Trends" class="muted">TikTok</a>
+                <a href="#" title="Pinterest" class="muted">Pinterest</a>
+              </div>
+            </div>
+
+            <div style="margin-top:12px; font-size:13px;" class="muted">
+              Prefer a downloadable resume or wholesale packet?
+              <div style="margin-top:8px;">
+                <a class="btn btn-primary" download="COCO_JOX_wholesale.pdf" href="#" onclick="fakeOpen(event)">Download wholesale packet</a>
+                <a class="btn btn-ghost" href="#" onclick="fakeOpen(event)">View resume/CV</a>
+              </div>
+            </div>
+          </div>
+
+          <div style="width:420px;">
+            <div class="card contact-form">
+              <!-- Basic contact form: uses mailto fallback -->
+              <form id="contactForm" onsubmit="submitForm(event)">
+                <div class="contact-grid">
+                  <input id="name" name="name" placeholder="Your name" required>
+                  <input id="email" name="email" placeholder="Your email" required type="email">
+                </div>
+                <div style="margin-top:10px;">
+                  <input id="subject" name="subject" placeholder="Subject" required>
+                </div>
+                <div style="margin-top:10px;">
+                  <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
+                </div>
+                <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
+                  <button class="btn btn-primary" type="submit">Send message</button>
+                  <small class="muted">Or email <a class="muted" href="mailto:coco@cocojox.example">coco@cocojox.example</a></small>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="max-width:960px; margin:auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+          <strong>COCO JOX</strong> &nbsp;·&nbsp; <span class="muted">Soft. Strong. Totally You.</span>
+        </div>
+        <div class="muted">Made with care • © <span id="year"></span></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // small utilities
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // fake open handling (for placeholders)
+    function fakeOpen(e){
+      e && e.preventDefault();
+      alert('This is a placeholder link — edit the HTML and replace with your real product or portfolio URL.');
+    }
+
+    // Contact form placeholder handler: mailto fallback
+    function submitForm(e){
+      e.preventDefault();
+      var name = encodeURIComponent(document.getElementById('name').value.trim());
+      var email = encodeURIComponent(document.getElementById('email').value.trim());
+      var subject = encodeURIComponent(document.getElementById('subject').value.trim());
+      var message = encodeURIComponent(document.getElementById('message').value.trim());
+
+      var body = 'Name: ' + name + '%0D%0AEmail: ' + email + '%0D%0A%0D%0A' + message;
+      var mailto = 'mailto:coco@cocojox.example' + '?subject=' + subject + '&body=' + body;
+      // try opening mailto
+      window.location.href = mailto;
+      // fallback: show text to copy
+      setTimeout(function(){
+        if(confirm('If your email client did not open, click OK to copy the message to clipboard.')){
+          navigator.clipboard && navigator.clipboard.writeText(decodeURIComponent(body.replace(/%0D%0A/g,'\\n'))).then(function(){
+            alert('Message copied to clipboard. Paste into your email app and send to coco@cocojox.example');
+          }, function(){
+            alert('Couldn\\'t copy automatically. Please send an email to coco@cocojox.example with your message.');
+          })
+        }
+      }, 600);
+    }
+
+    // small "Edit content" helper opens an inline quick-edit modal (simple prompt-based editing)
+    function openEdit(){
+      var choice = prompt('Quick edit: type the number you want to edit:\\n1=Brand name\\n2=Tagline\\n3=Email contact\\n4=Hero lead text\\n(Example: type 2 then press Enter)');
+      if(!choice) return;
+      choice = choice.trim();
+      if(choice==='1'){
+        var v = prompt('New brand name:', 'COCO JOX');
+        if(v) document.querySelector('.brand h1').textContent = v;
+      } else if(choice==='2'){
+        var v = prompt('New tagline:', 'Soft, Strong. Totally You.');
+        if(v) document.querySelector('.brand p').textContent = v;
+      } else if(choice==='3'){
+        var v = prompt('Contact email:', 'coco@cocojox.example');
+        if(v){
+          var a = document.querySelector('a[href^="mailto:"]');
+          a.href = 'mailto:'+v;
+          a.textContent = v;
+        }
+      } else if(choice==='4'){
+        var v = prompt('Hero subheading text:', 'Balancing playful and empowerment. Designed for comfort, confidence and colorful self-expression — whoever “you” is.');
+        if(v) document.querySelector('.hero .lead').textContent = v;
+      } else {
+        alert('No handler for that choice. Edit the HTML for full control.');
+      }
+    }
+
+  </script>
+</body>
+</html>
